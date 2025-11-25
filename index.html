@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏交易平台 - 限量皮肤购买</title>
+    <title>游戏交易平台 - 注册与支付</title>
     <style>
         * {
             margin: 0;
@@ -46,6 +46,15 @@
             opacity: 0.9;
         }
         
+        .section {
+            display: none;
+            padding: 20px 15px;
+        }
+        
+        .active {
+            display: block;
+        }
+        
         .chat-container {
             padding: 15px;
             max-height: 200px;
@@ -85,11 +94,6 @@
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             color: white;
             border-top-right-radius: 4px;
-        }
-        
-        .input-area {
-            padding: 15px;
-            background-color: white;
         }
         
         .form-group {
@@ -138,6 +142,7 @@
             font-weight: bold;
             width: 100%;
             transition: opacity 0.3s;
+            margin-top: 10px;
         }
         
         .btn:hover {
@@ -222,6 +227,49 @@
             border-top: 1px solid #eee;
         }
         
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .step.active {
+            background-color: #6e8efb;
+            color: white;
+        }
+        
+        .step-line {
+            flex: 1;
+            height: 3px;
+            background-color: #ddd;
+            margin: 0 5px;
+            align-self: center;
+        }
+        
+        .step-line.active {
+            background-color: #6e8efb;
+        }
+        
+        .step-text {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
         /* 响应式调整 */
         @media (max-width: 480px) {
             body {
@@ -250,8 +298,8 @@
                 padding: 8px 12px;
             }
             
-            .input-area {
-                padding: 10px;
+            .section {
+                padding: 15px 10px;
             }
             
             .form-group {
@@ -289,84 +337,146 @@
     <div class="container">
         <header>
             <h1>游戏交易平台</h1>
-            <p class="subtitle">安全支付 - 限量皮肤【飓风号】</p>
+            <p class="subtitle">限量皮肤【飓风号】购买流程</p>
         </header>
         
-        <div class="chat-container" id="chatContainer">
-            <div class="message received">
-                <div class="message-bubble">
-                    <p>亲，恭喜您抽中限量皮肤【飓风号】！</p>
-                    <p>请填写下方信息完成付款，皮肤将秒到账！</p>
+        <!-- 步骤指示器 -->
+        <div class="step-indicator">
+            <div class="step active">1</div>
+            <div class="step-line"></div>
+            <div class="step">2</div>
+        </div>
+        <div class="step-text">
+            <span>注册账号</span>
+            <span style="margin-left: 60px;">完成支付</span>
+        </div>
+        
+        <!-- 注册部分 -->
+        <div id="registerSection" class="section active">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" placeholder="请输入用户名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="请输入密码" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">确认密码</label>
+                <input type="password" id="confirmPassword" placeholder="请再次输入密码" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">手机号码</label>
+                <input type="tel" id="phone" placeholder="用于接收验证码" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="verificationCode">验证码</label>
+                <div class="verification-group">
+                    <input type="text" id="verificationCode" placeholder="请输入验证码" required>
+                    <button type="button" class="btn send-code-btn" id="sendCodeBtn">发送验证码</button>
                 </div>
             </div>
+            
+            <button class="btn" id="registerBtn">注册账号</button>
         </div>
         
-        <div class="game-info">
-            <h3>订单信息</h3>
-            <p>商品：限量皮肤【飓风号】</p>
-            <p>价格：¥128.00</p>
-            <p>状态：等待支付</p>
-        </div>
-        
-        <div class="input-area" id="inputArea">
-            <form id="paymentForm">
-                <div class="form-group">
-                    <label for="cardNumber">银行卡号</label>
-                    <input type="text" id="cardNumber" placeholder="请输入银行卡号" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="cardHolder">持卡人姓名</label>
-                    <input type="text" id="cardHolder" placeholder="请输入持卡人姓名" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="expiryDate">有效期</label>
-                    <input type="text" id="expiryDate" placeholder="MM/YY" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="cvv">CVV安全码</label>
-                    <input type="text" id="cvv" placeholder="卡背面3位数字" required>
-                </div>
-                
-                <!-- 手机号单独一行 -->
-                <div class="form-group">
-                    <label for="phone">手机号码</label>
-                    <input type="tel" id="phone" placeholder="用于接收验证码" required>
-                </div>
-                
-                <!-- 验证码和发送按钮一行 -->
-                <div class="form-group">
-                    <label for="verificationCode">验证码</label>
-                    <div class="verification-group">
-                        <input type="text" id="verificationCode" placeholder="请输入验证码" required>
-                        <button type="button" class="btn send-code-btn" id="sendCodeBtn">发送验证码</button>
+        <!-- 支付部分 -->
+        <div id="paymentSection" class="section">
+            <div class="chat-container" id="chatContainer">
+                <div class="message received">
+                    <div class="message-bubble">
+                        <p>亲，恭喜您抽中限量皮肤【飓风号】！</p>
+                        <p>请填写下方信息完成付款，皮肤将秒到账！</p>
                     </div>
                 </div>
-                
-                <button type="submit" class="btn" id="submitBtn">立即支付</button>
-            </form>
-        </div>
-        
-        <div class="loading" id="loadingArea">
-            <div class="spinner"></div>
-            <p>正在处理付款，请稍候...</p>
-        </div>
-        
-        <div class="result" id="resultArea">
-            <div class="success" id="successMsg">
-                <p>✓ 付款成功！皮肤将在10分钟内发放到您的账户</p>
             </div>
-            <button class="btn back-btn" id="backBtn">返回首页</button>
+            
+            <div class="game-info">
+                <h3>订单信息</h3>
+                <p>商品：限量皮肤【飓风号】</p>
+                <p>价格：¥128.00</p>
+                <p>状态：等待支付</p>
+            </div>
+            
+            <div class="input-area" id="inputArea">
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardNumber">银行卡号</label>
+                        <input type="text" id="cardNumber" placeholder="请输入银行卡号" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardHolder">持卡人姓名</label>
+                        <input type="text" id="cardHolder" placeholder="请输入持卡人姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiryDate">有效期</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvv">CVV安全码</label>
+                        <input type="text" id="cvv" placeholder="卡背面3位数字" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="submitBtn">立即支付</button>
+                </form>
+            </div>
+            
+            <div class="loading" id="loadingArea">
+                <div class="spinner"></div>
+                <p>正在处理付款，请稍候...</p>
+            </div>
+            
+            <div class="result" id="resultArea">
+                <div class="success" id="successMsg">
+                    <p>✓ 付款成功！皮肤将在10分钟内发放到您的账户</p>
+                </div>
+                <button class="btn back-btn" id="backBtn">返回首页</button>
+            </div>
         </div>
         
         <div class="footer-note">
-            <p>GitHub Pages 演示页面 | 游戏交易诈骗模拟</p>
+            <p> 游戏交易</p>
         </div>
     </div>
 
     <script>
+        // 页面切换功能
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            // 简单的表单验证
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const phone = document.getElementById('phone').value;
+            const verificationCode = document.getElementById('verificationCode').value;
+            
+            if (!username || !password || !confirmPassword || !phone || !verificationCode) {
+                alert('请填写所有必填字段');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致');
+                return;
+            }
+            
+            // 切换到支付页面
+            document.getElementById('registerSection').classList.remove('active');
+            document.getElementById('paymentSection').classList.add('active');
+            
+            // 更新步骤指示器
+            document.querySelectorAll('.step')[0].classList.remove('active');
+            document.querySelectorAll('.step')[1].classList.add('active');
+            document.querySelector('.step-line').classList.add('active');
+        });
+        
+        // 发送验证码功能
         document.getElementById('sendCodeBtn').addEventListener('click', function() {
             const phone = document.getElementById('phone').value;
             if (!phone) {
@@ -400,15 +510,9 @@
             alert('验证码已发送到您的手机，请注意查收（模拟验证码：123456）');
         });
         
+        // 支付功能
         document.getElementById('paymentForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // 验证验证码
-            const verificationCode = document.getElementById('verificationCode').value;
-            if (verificationCode !== '123456') {
-                alert('验证码错误，请重新输入');
-                return;
-            }
             
             // 显示加载动画
             document.getElementById('inputArea').style.display = 'none';
@@ -436,6 +540,7 @@
             }, 3000);
         });
         
+        // 返回首页功能
         document.getElementById('backBtn').addEventListener('click', function() {
             // 重置表单和显示
             document.getElementById('paymentForm').reset();
@@ -445,6 +550,22 @@
             // 重置发送验证码按钮
             document.getElementById('sendCodeBtn').textContent = '发送验证码';
             document.getElementById('sendCodeBtn').disabled = false;
+            
+            // 切换回注册页面
+            document.getElementById('registerSection').classList.add('active');
+            document.getElementById('paymentSection').classList.remove('active');
+            
+            // 重置步骤指示器
+            document.querySelectorAll('.step')[0].classList.add('active');
+            document.querySelectorAll('.step')[1].classList.remove('active');
+            document.querySelector('.step-line').classList.remove('active');
+            
+            // 重置注册表单
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('confirmPassword').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('verificationCode').value = '';
         });
     </script>
 </body>
