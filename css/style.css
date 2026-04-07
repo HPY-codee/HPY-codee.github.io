@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+    background: #f5f5f5;          /* 浅灰背景，干净 */
+    color: #1e1e1e;               /* 深灰色文字，对比度高 */
+    line-height: 1.5;
+}
+
+.navbar {
+    background: #FFC107;          /* 深橙棕色，不刺眼但足够深 */
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: #ffffff;               /* 白色文字，高对比 */
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #d45a1e;               /* 白色导航文字 */
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.nav-links a:hover, .nav-links .active {
+    color: #ffe0b3;
+    border-bottom: 2px solid #ffe0b3;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.hero {
+    text-align: center;
+    background: #ffffff;          /* 纯白卡片背景 */
+    border-radius: 2rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    background: #f3c26b;
+    color: #5c2e00;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border: 1px solid #dddddd;
+}
+
+.card-header {
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-bottom: 2px solid #f0a55a;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c2c2c;
+}
+
+.clock-box {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    background: #f9efdf;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: #c04200;
+}
+
+.btn-sm {
+    background: #d45a1e;
+    color: white;
+    border: none;
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-sm:hover {
+    background: #b04610;
+}
+
+.skill-item {
+    margin-bottom: 1.2rem;
+}
+
+.skill-item span {
+    font-weight: 600;
+    color: #1e1e1e;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.progress {
+    background: #f5a623;
+    height: 20px;
+    width: 0%;
+    border-radius: 20px;
+    transition: width 0.3s;
+    text-align: right;
+    line-height: 20px;
+    color: white;
+    padding-right: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hobby-grid {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.hobby-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    border: 1px solid #f0c48b;
+}
+.hobby-card i { font-size: 2rem; color: #e67e22; margin-bottom: 0.5rem; }
+.hobby-card h3 { color: #2c2c2c; }
+
+form label {
+    display: block;
+    margin: 0.8rem 0 0.2rem;
+    font-weight: 700;
+    color: #2c2c2c;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.8rem;
+    background: #ffffff;
+    font-size: 1rem;
+}
+
+.btn-submit {
+    background: #d45a1e;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.btn-submit:hover {
+    background: #b04610;
+}
+
+.error-msg {
+    color: #c0392b;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #e8e8e8;
+    margin-top: 2rem;
+    color: #2c2c2c;
+    border-top: 1px solid #cccccc;
+}
+
+.tech-note {
+    font-size: 0.85rem;
+    color: #5a5a5a;
+    margin-top: 0.8rem;
+    border-top: 1px dashed #cccccc;
+    padding-top: 0.5rem;
+}
